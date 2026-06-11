@@ -82,19 +82,17 @@ void insertMaxHeap(WordFreq heap[], int *size, int k, WordFreq item) {
 
 /* Mengekstrak root satu per satu ke akhir array untuk mendapatkan urutan terurut (descending) */
 void heapSortDescending(WordFreq heap[], int size, int isMinHeap) {
+    // Jalankan ekstraksi heapsort standar
     for (int i = size - 1; i > 0; i--) {
         swap(&heap[0], &heap[i]);
         if (isMinHeap) minHeapify(heap, i, 0);
         else maxHeapify(heap, i, 0);
     }
 
-    /* Membalikkan khusus hasil Min-Heap agar urutannya menjadi dari besar ke kecil */
-    if (isMinHeap) {
-        int start = 0, end = size - 1;
-        while (start < end) {
-            swap(&heap[start], &heap[end]);
-            start++;
-            end--;
-        }
+    int start = 0, end = size - 1;
+    while (start < end) {
+        swap(&heap[start], &heap[end]);
+        start++;
+        end--;
     }
 }
