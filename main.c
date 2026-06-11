@@ -5,10 +5,10 @@
 #include "data.h"
 #include "heap.h"
 
-// Konstanta default kapasitas heap sesuai spesifikasi tugas
+// Konstanta default kapasitas heap sesuai spesifikasi tugas (Halaman 4: k=100)
 #define K 100
 
-/* Menyimpan hasil pengurutan ke file teks */
+/* Menyimpan hasil pengurutan ke file teks. Menggunakan %lld untuk mencetak long long frekuensi. */
 void saveResult(const char *filename, WordFreq heap[], int size, double elapsedTime) {
     FILE *fp = fopen(filename, "w");
     if (fp == NULL) {
@@ -17,16 +17,15 @@ void saveResult(const char *filename, WordFreq heap[], int size, double elapsedT
     }
 
     for (int i = 0; i < size; i++) {
-        // Menggunakan %d karena heap[i].frequency bertipe int
-        fprintf(fp, "%s (%d)\n", vocab[heap[i].wordID], heap[i].frequency);
+        fprintf(fp, "%s (%lld)\n", vocab[heap[i].wordID], heap[i].frequency);
     }
     
-    // Menuliskan catatan waktu di akhir berkas sesuai instruksi soal
+    // Menuliskan catatan waktu di akhir berkas sesuai instruksi soal (Halaman 4)
     fprintf(fp, "\nWaktu untuk mengurutkan: %.0f ms\n", elapsedTime);
     fclose(fp);
 }
 
-/* Menampilkan hasil pengurutan ke layar monitor */
+/* Menampilkan hasil pengurutan ke layar monitor dengan penentu format %lld */
 void displayResult(WordFreq heap[], int size, double elapsedTime) {
     if (size == 0) {
         printf("Data belum diproses. Silakan jalankan Menu 1 atau Menu 2 terlebih dahulu.\n");
@@ -34,7 +33,7 @@ void displayResult(WordFreq heap[], int size, double elapsedTime) {
     }
 
     for (int i = 0; i < size; i++) {
-        printf("%3d. %-25s (%d)\n", i + 1, vocab[heap[i].wordID], heap[i].frequency);
+        printf("%3d. %-25s (%lld)\n", i + 1, vocab[heap[i].wordID], heap[i].frequency);
     }
     printf("\nWaktu untuk mengurutkan: %.0f ms\n", elapsedTime);
 }
@@ -107,7 +106,7 @@ int main() {
                     if (freq[i] > 0) {
                         WordFreq item;
                         item.wordID = i;
-                        item.frequency = (int)freq[i];
+                        item.frequency = freq[i]; // Tanpa type casting karena tipe datanya sudah seragam (long long)
                         insertMinHeap(frequentHeap, &frequentSize, K, item);
                     }
                 }
@@ -135,7 +134,7 @@ int main() {
                     if (freq[i] > 0) {
                         WordFreq item;
                         item.wordID = i;
-                        item.frequency = (int)freq[i];
+                        item.frequency = freq[i]; // Tanpa type casting karena tipe datanya sudah seragam (long long)
                         insertMaxHeap(rareHeap, &rareSize, K, item);
                     }
                 }

@@ -1,10 +1,11 @@
 #ifndef HEAP_H
 #define HEAP_H
 
-/* Struktur data untuk menyimpan pasangan ID kata dan total frekuensinya */
+/* Struktur data untuk menyimpan pasangan ID kata dan total frekuensinya.
+   Menggunakan long long pada frequency agar mampu menangani dataset raksasa (PubMed/NYTimes). */
 typedef struct {
     int wordID;
-    int frequency;
+    long long frequency;
 } WordFreq;
 
 /* Mengatur ulang susunan node pada Min-Heap agar memenuhi sifat Min-Heap */
