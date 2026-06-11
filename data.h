@@ -5,35 +5,22 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Jumlah kata unik
 extern int W;
 
-// Vocabulary
-// vocab[wordID] -> kata
 extern char **vocab;
 
-// Total frekuensi setiap kata
 extern long long *freq;
 
-// Menyimpan informasi kata dan frekuensinya
-typedef struct
-{
-    int wordID;
-    char word[100];
-    long long freq;
-} WordFreq;
-
-// Membaca file vocab.*.txt
+// Membaca file vocab
 void loadVocabulary(const char *filename);
 
-// Membaca file docword.*.txt
-// sekaligus menghitung total frekuensi kata
+// Membaca file docword
 void loadDocword(const char *filename);
 
-// Menampilkan beberapa data untuk pengecekan
+// Menampilkan sampel data
 void printSample(int n);
 
-// Membebaskan memori yang digunakan
+// Membebaskan memori
 void freeData(void);
 
 #endif
