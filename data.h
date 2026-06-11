@@ -5,25 +5,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Jumlah kata unik
+// Jumlah kata unik dalam dataset
 extern int W;
 
-// Vocabulary
+// Array pembantu penampung Vocabulary & Frekuensi (Global)
 extern char **vocab;
-
-// Total frekuensi tiap kata
 extern long long *freq;
 
-// Membaca file vocab
-void loadVocabulary(const char *filename);
-
-// Membaca file docword
+// Prototipe Fungsi Utama Manajemen File
 void loadDocword(const char *filename);
-
-// Menampilkan beberapa data untuk testing
-void printSample(int n);
-
-// Membebaskan memori
+void loadVocabulary(const char *filename);
 void freeData(void);
 
 #endif

@@ -9,8 +9,6 @@ static void swap(WordFreq *a, WordFreq *b) {
 }
 
 /* --- IMPLEMENTASI MIN-HEAP --- */
-
-/* Menurunkan elemen ke bawah jika nilainya lebih besar dari elemen anaknya */
 void minHeapify(WordFreq heap[], int size, int index) {
     int smallest = index;
     int left = 2 * index + 1;
@@ -27,7 +25,6 @@ void minHeapify(WordFreq heap[], int size, int index) {
     }
 }
 
-/* Menyisipkan elemen baru: mengganti root jika heap penuh dan frekuensi baru lebih besar */
 void insertMinHeap(WordFreq heap[], int *size, int k, WordFreq item) {
     if (*size < k) {
         heap[*size] = item;
@@ -44,8 +41,6 @@ void insertMinHeap(WordFreq heap[], int *size, int k, WordFreq item) {
 }
 
 /* --- IMPLEMENTASI MAX-HEAP --- */
-
-/* Menurunkan elemen ke bawah jika nilainya lebih kecil dari elemen anaknya */
 void maxHeapify(WordFreq heap[], int size, int index) {
     int largest = index;
     int left = 2 * index + 1;
@@ -62,7 +57,6 @@ void maxHeapify(WordFreq heap[], int size, int index) {
     }
 }
 
-/* Menyisipkan elemen baru: mengganti root jika heap penuh dan frekuensi baru lebih kecil */
 void insertMaxHeap(WordFreq heap[], int *size, int k, WordFreq item) {
     if (*size < k) {
         heap[*size] = item;
@@ -79,20 +73,23 @@ void insertMaxHeap(WordFreq heap[], int *size, int k, WordFreq item) {
 }
 
 /* --- IMPLEMENTASI HEAPSORT --- */
-
-/* Mengekstrak root satu per satu ke akhir array untuk mendapatkan urutan terurut (descending) */
 void heapSortDescending(WordFreq heap[], int size, int isMinHeap) {
-    // Jalankan ekstraksi heapsort standar
+    // 1. Lakukan ekstraksi Heapsort standar
     for (int i = size - 1; i > 0; i--) {
         swap(&heap[0], &heap[i]);
         if (isMinHeap) minHeapify(heap, i, 0);
         else maxHeapify(heap, i, 0);
     }
 
-    int start = 0, end = size - 1;
-    while (start < end) {
-        swap(&heap[start], &heap[end]);
-        start++;
-        end--;
+    // 2. Koreksi Logika Pengurutan agar KEDUANYA menghasilkan Descending:
+    // - Hasil Heapsort dari Min-Heap secara alami sudah descending, JANGAN dibalik.
+    // - Hasil Heapsort dari Max-Heap secara alami adalah ascending, WAJIB dibalik.
+    if (!isMinHeap) {
+        int start = 0, end = size - 1;
+        while (start < end) {
+            swap(&heap[start], &heap[end]);
+            start++;
+            end--;
+        }
     }
 }
