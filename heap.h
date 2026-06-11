@@ -1,26 +1,25 @@
 #ifndef HEAP_H
 #define HEAP_H
 
-// Struktur data untuk menyimpan pasangan WordID dan Frekuensinya
+/* Struktur data untuk menyimpan pasangan ID kata dan total frekuensinya */
 typedef struct {
     int wordID;
     int frequency;
 } WordFreq;
 
-// --- FUNGSI UNTUK MIN-HEAP (Pilihan 1: Kata Paling Sering Muncul) ---
-// Melakukan heapify down pada Min-Heap
+/* Mengatur ulang susunan node pohon pada Min-Heap agar memenuhi sifat Min-Heap */
 void minHeapify(WordFreq heap[], int size, int index);
-// Memasukkan data baru ke dalam Min-Heap berukuran k
+
+/* Memasukkan elemen baru ke dalam Min-Heap dengan batas maksimum k elemen */
 void insertMinHeap(WordFreq heap[], int *size, int k, WordFreq item);
 
-// --- FUNGSI UNTUK MAX-HEAP (Pilihan 2: Kata Paling Jarang Muncul) ---
-// Melakukan heapify down pada Max-Heap
+/* Mengatur ulang susunan node pohon pada Max-Heap agar memenuhi sifat Max-Heap */
 void maxHeapify(WordFreq heap[], int size, int index);
-// Memasukkan data baru ke dalam Max-Heap berukuran k
+
+/* Memasukkan elemen baru ke dalam Max-Heap dengan batas maksimum k elemen */
 void insertMaxHeap(WordFreq heap[], int *size, int k, WordFreq item);
 
-// --- FUNGSI PENGURUTAN (HEAPSORT) ---
-// Mengurutkan isi heap secara descending order (dari besar ke kecil)
+/* Mengurutkan isi array di dalam heap dari frekuensi terbesar ke terkecil */
 void heapSortDescending(WordFreq heap[], int size, int isMinHeap);
 
 #endif
